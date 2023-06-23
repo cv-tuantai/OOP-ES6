@@ -49,4 +49,38 @@ export default class ListPerson {
       console.log(type);
       return user.type === type;
     });
+
+  /* Sort theo tên A -> Z */
+  sortName = () => {
+    return this.arr.sort((user1, user2) => {
+      const userName1 = user1.name.toLowerCase();
+      const userName2 = user2.name.toLowerCase();
+
+      if (userName1 < userName2) {
+        return -1;
+      }
+
+      if (userName1 > userName2) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  /* Sort theo tên Z -> A */
+  sortNameReverse = () => {
+    return this.arr.sort((user1, user2) => {
+      const userName1 = user1.name.toLowerCase();
+      const userName2 = user2.name.toLowerCase();
+
+      if (userName1 < userName2) {
+        return 1;
+      }
+
+      if (userName1 > userName2) {
+        return -1;
+      }
+      return 0;
+    });
+  };
 }

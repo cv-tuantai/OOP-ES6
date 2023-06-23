@@ -1,4 +1,12 @@
-import { getEle, saveData, getData, getInfo, renderUI } from "./controller.js";
+import {
+  getEle,
+  saveData,
+  getData,
+  getInfo,
+  renderUI,
+  clearForm,
+  clearErr,
+} from "./controller.js";
 import ListPerson from "../module/ListPerson.js";
 
 /* Tạo đối tượng listPerson từ lớp đối tượng ListPerson */
@@ -43,6 +51,11 @@ getEle("btnThem").addEventListener("click", () => {
   getEle("btnUpdate").style.display = "none";
   // Mở khóa nhập ID
   getEle("idUser").disabled = false;
+  // Clear thông tin cũ
+  clearForm();
+  // Hide tùy chọn
+  hideAll();
+  clearErr();
 });
 
 /* Thêm user */
@@ -164,4 +177,14 @@ getEle("Loai").addEventListener("change", () => {
   } else {
     renderUI(listPerson.arr);
   }
+});
+
+/* Sort tên từ A -> Z */
+getEle("SapXepGiam").addEventListener("click", () => {
+  renderUI(listPerson.sortName());
+});
+
+/* Sort tên từ Z -> A */
+getEle("SapXepTang").addEventListener("click", () => {
+  renderUI(listPerson.sortNameReverse());
 });

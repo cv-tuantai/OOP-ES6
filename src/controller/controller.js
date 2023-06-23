@@ -150,7 +150,6 @@ const getInfo = () => {
       const physics = getEle("physics").value;
       const chemistry = getEle("chemistry").value;
 
-      console.log(validateStudent(math, physics, chemistry));
       if (validateStudent(math, physics, chemistry)) {
         const student = new Student(
           idUser,
@@ -211,10 +210,38 @@ const getInfo = () => {
   } else return;
 };
 
-/* Hàm clear thông tin form */
-const clearForm = () => {};
+/* Hàm clear thông tin form khi thêm mới */
+const clearForm = () => {
+  getEle("idUser").value = "";
+  getEle("nameUser").value = "";
+  getEle("address").value = "";
+  getEle("email").value = "";
+  getEle("type").value = "";
+  getEle("math").value = "";
+  getEle("physics").value = "";
+  getEle("chemistry").value = "";
+  getEle("dailySalary").value = "";
+  getEle("workingDay").value = "";
+  getEle("companyName").value = "";
+  getEle("billInvoice").value = "";
+  getEle("review").value = "";
+};
 
-/* Hàm clear thông báo lỗi */
-const clearErr = () => {};
+/* Hàm clear thông báo lỗi cũ */
+const clearErr = () => {
+  getEle("tbTKNV").style.display = "none";
+  getEle("tbNameUser").style.display = "none";
+  getEle("tbAddress").style.display = "none";
+  getEle("tbEmail").style.display = "none";
+  getEle("tbType").style.display = "none";
+  getEle("tbMath").style.display = "none";
+  getEle("tbPhysics").style.display = "none";
+  getEle("tbChemistry").style.display = "none";
+  getEle("tbDailySal").style.display = "none";
+  getEle("tbWorkingDay").style.display = "none";
+  getEle("tbCompanyName").style.display = "none";
+  getEle("tbBillInvoice").style.display = "none";
+  getEle("tbReview").style.display = "none";
+};
 
-export { getEle, saveData, getData, getInfo, renderUI };
+export { getEle, saveData, getData, getInfo, renderUI, clearForm, clearErr };
