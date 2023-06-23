@@ -8,13 +8,6 @@ const validate = new Validation();
 /* Hàm DOM ID */
 const getEle = (id) => document.getElementById(id);
 
-/* Hàm lưu dữ liệu vào local storage */
-const saveData = (data) =>
-  localStorage.setItem("listPerson", JSON.stringify(data));
-
-/* Hàm lấy dữ liệu từ local storage */
-const getData = () => JSON.parse(localStorage.getItem("listPerson"));
-
 /* Hàm Render UI */
 const renderUI = (data) => {
   let content = "";
@@ -246,4 +239,4 @@ const clearErr = () => {
   getEle("tbReview").style.display = "none";
 };
 
-export { getEle, saveData, getData, getInfo, renderUI, clearForm, clearErr };
+export { getEle, getInfo, renderUI, clearForm, clearErr };

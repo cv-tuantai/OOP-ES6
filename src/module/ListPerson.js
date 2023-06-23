@@ -46,7 +46,6 @@ export default class ListPerson {
   /* Lọc user theo loại */
   filterUser = (type) =>
     this.arr.filter((user) => {
-      console.log(type);
       return user.type === type;
     });
 

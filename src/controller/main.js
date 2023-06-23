@@ -1,7 +1,5 @@
 import {
   getEle,
-  saveData,
-  getData,
   getInfo,
   renderUI,
   clearForm,
@@ -12,9 +10,18 @@ import ListPerson from "../module/ListPerson.js";
 /* Tạo đối tượng listPerson từ lớp đối tượng ListPerson */
 const listPerson = new ListPerson();
 
-/* Lấy data từ local storage hiện thị lên giao diện khi load trang */
-listPerson.arr = getData();
-if (listPerson.arr) renderUI(listPerson.arr);
+/* Hàm lưu dữ liệu vào local storage */
+const saveData = (data) =>
+  localStorage.setItem("listPerson", JSON.stringify(data));
+
+/* Hàm lấy dữ liệu từ local storage */
+const getData = () => {
+  if (localStorage.getItem("listPerson")) {
+    listPerson.arr = JSON.parse(localStorage.getItem("listPerson"));
+    renderUI(listPerson.arr);
+  }
+};
+getData();
 
 /* Thay đổi giao diện khi chọn Loại user */
 const hideAll = () => {
@@ -108,6 +115,8 @@ const editPerson = (id) => {
   getEle("btnAdd").style.display = "none";
   // Hiện nút cập nhật
   getEle("btnUpdate").style.display = "block";
+  // Clear thông báo lỗi cũ
+  clearErr();
 
   // Lấy thông tin user bằng id
   const user = listPerson.findUser(id);
@@ -154,14 +163,16 @@ window.editPerson = editPerson;
 /* Cập nhật user */
 getEle("btnUpdate").addEventListener("click", () => {
   const user = getInfo();
-  const result = listPerson.updatePerson(user);
-  if (result) {
-    // render giao diện
-    renderUI(listPerson.arr);
-    // lưu dữ liệu vào local storage
-    saveData(listPerson.arr);
-    // Đóng modal
-    getEle("btnClose").click();
+  if (user) {
+    const result = listPerson.updatePerson(user);
+    if (result) {
+      // render giao diện
+      renderUI(listPerson.arr);
+      // lưu dữ liệu vào local storage
+      saveData(listPerson.arr);
+      // Đóng modal
+      getEle("btnClose").click();
+    }
   }
 });
 
