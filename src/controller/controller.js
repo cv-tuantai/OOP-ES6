@@ -144,70 +144,72 @@ const getInfo = () => {
   const email = getEle("email").value;
   const type = getEle("type").value;
 
-  if (validatePerson(idUser, nameUser, address, email, "type")) {
-    if (type === "student") {
-      const math = getEle("math").value;
-      const physics = getEle("physics").value;
-      const chemistry = getEle("chemistry").value;
+  let isValid = validatePerson(idUser, nameUser, address, email, "type");
+  if (type === "student") {
+    const math = getEle("math").value;
+    const physics = getEle("physics").value;
+    const chemistry = getEle("chemistry").value;
 
-      if (validateStudent(math, physics, chemistry)) {
-        const student = new Student(
-          idUser,
-          nameUser,
-          address,
-          email,
-          type,
-          math,
-          physics,
-          chemistry,
-        );
+    isValid &= validateStudent(math, physics, chemistry);
+    if (!isValid) return null;
 
-        student.calcGPA();
-        return student;
-      }
-    }
+    const student = new Student(
+      idUser,
+      nameUser,
+      address,
+      email,
+      type,
+      math,
+      physics,
+      chemistry,
+    );
 
-    if (type === "employee") {
-      const dailySalary = getEle("dailySalary").value;
-      const workingDay = getEle("workingDay").value;
+    student.calcGPA();
+    return student;
+  }
 
-      if (validateEmployee(dailySalary, workingDay)) {
-        const employee = new Employee(
-          idUser,
-          nameUser,
-          address,
-          email,
-          type,
-          workingDay,
-          dailySalary,
-        );
+  if (type === "employee") {
+    const dailySalary = getEle("dailySalary").value;
+    const workingDay = getEle("workingDay").value;
 
-        employee.calcSalary();
-        return employee;
-      }
-    }
+    isValid &= validateEmployee(dailySalary, workingDay);
+    if (!isValid) return null;
 
-    if (type === "customer") {
-      const companyName = getEle("companyName").value;
-      const billInvoice = getEle("billInvoice").value;
-      const review = getEle("review").value;
+    const employee = new Employee(
+      idUser,
+      nameUser,
+      address,
+      email,
+      type,
+      workingDay,
+      dailySalary,
+    );
 
-      if (validateCustomer(companyName, billInvoice, review)) {
-        const customer = new Customer(
-          idUser,
-          nameUser,
-          address,
-          email,
-          type,
-          companyName,
-          billInvoice,
-          review,
-        );
+    employee.calcSalary();
+    return employee;
+  }
 
-        return customer;
-      }
-    }
-  } else return;
+  if (type === "customer") {
+    const companyName = getEle("companyName").value;
+    const billInvoice = getEle("billInvoice").value;
+    const review = getEle("review").value;
+
+    isValid &= validateCustomer(companyName, billInvoice, review);
+    if (!isValid) return null;
+
+    const customer = new Customer(
+      idUser,
+      nameUser,
+      address,
+      email,
+      type,
+      companyName,
+      billInvoice,
+      review,
+    );
+
+    return customer;
+  }
 };
 
 /* Hàm clear thông tin form khi thêm mới */
